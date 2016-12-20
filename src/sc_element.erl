@@ -42,8 +42,6 @@
 %%
 %% @end
 %%--------------------------------------------------------------------
--spec(start_link(Value, LeaseTime) ->
-  {ok, Pid :: pid()} | ignore | {error, Reason :: term()}).
 start_link(Value, LeaseTime) ->
   gen_server:start_link({local, ?SERVER}, ?MODULE, [Value, LeaseTime], []).
 
