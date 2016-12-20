@@ -17,5 +17,6 @@
     stdlib
   ]},
   {mod, {sc_app, []}},
-  {env, []}
+  {env, []},
+  {start_phases, []}
 ]}.
