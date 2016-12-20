@@ -21,4 +21,5 @@ erl
 Then, run the following in the Erlang shell:
 
 1> application:start(simple_cache).
+
 ok
