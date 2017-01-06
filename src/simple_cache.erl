@@ -21,10 +21,12 @@
 insert(Key, Value) ->
   case sc_store:lookup(Key) of
     {ok, Pid}  ->
+      sc_event:replace(Key),
       sc_element:replace(Pid, Value);
     {error, _Reason} ->
-      {ok, Pid} = sc_element:create(Value),
-      sc_store:insert(Key, Pid)
+      sc_event:create(Key),
+      sc_element:create(Value),
+      sc_store:insert(Key, Value)
 end.
 
 lookup(Key) ->
@@ -39,6 +41,7 @@ lookup(Key) ->
 delete(Key) ->
   case sc_store:lookup(Key) of
     {ok, Pid} ->
+      sc_event:delete(Key),
       sc_element:delete(Pid);
     {error, _Reason} ->
       ok
