@@ -30,6 +30,7 @@ insert(Key, Value) ->
 end.
 
 lookup(Key) ->
+  sc_event:lookup(Key),
   try
     {ok, Pid} = sc_store:lookup(Key),
     {ok, Value} = sc_element:fetch(Pid),
@@ -39,9 +40,9 @@ lookup(Key) ->
   end.
 
 delete(Key) ->
+  sc_event:delete(Key),
   case sc_store:lookup(Key) of
     {ok, Pid} ->
-      sc_event:delete(Key),
       sc_element:delete(Pid);
     {error, _Reason} ->
       ok
